@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FT | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- ไลบรารีสำหรับ Chatbot -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #fca311;
+            --text: #e6e6e6;
+            --light: #ffffff;
+            --dark: #0f0f1a;
+            --transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: var(--light);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-accent:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .hero-shape {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background: var(--secondary);
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 1;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 10%;
+            top: 60%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--dark);
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .about-img {
+            flex: 1;
+            position: relative;
+            max-width: 500px;
+        }
+
+        .about-img img {
+            display: block;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Services Section */
+        #services { background: var(--primary); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--secondary);
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .service-card p { opacity: 0.8; }
+
+        /* Portfolio Section */
+        #portfolio { background: var(--dark); }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            display: block;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        footer .logo { font-size: 1.5rem; }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: var(--secondary); display: flex; align-items: center;
+            justify-content: center; color: var(--text); font-size: 1.2rem;
+            transition: var(--transition); text-decoration: none;
+        }
+        .social-link:hover {
+            background: var(--accent); color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright { opacity: 0.7; font-size: 0.9rem; }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 50px; height: 50px; background: var(--accent); color: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden;
+            transition: var(--transition); z-index: 999; text-decoration: none;
+        }
+        .back-to-top.active { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: translateY(-5px); }
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 15, 26, 0.7); backdrop-filter: blur(5px);
+            z-index: 999; opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease;
+        }
+        .nav-overlay.active { opacity: 1; visibility: visible; }
+
+        /* === START: AI CHATBOT STYLES === */
+        #contact { background: var(--dark); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .contact-grid {
+                grid-template-columns: repeat(12, 1fr);
+                gap: 4rem;
+                align-items: center;
+            }
+            .contact-info-col { grid-column: span 5 / span 5; }
+            .chat-col { grid-column: span 7 / span 7; }
+        }
+
+        .contact-info-col h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+        .contact-info-col p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .contact-card-icon {
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-right: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-card-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent);
+        }
+        .contact-card-text .title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--light);
+        }
+        .contact-card-text .subtitle {
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        .chat-container {
+            width: 100%;
+            background: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @media (min-width: 640px) { .chat-container { padding: 2rem; } }
+
+        .chat-header { text-align: center; margin-bottom: 2rem; }
+        .chat-header h3 { font-size: 1.8rem; color: var(--light); margin-bottom: 0.5rem; }
+        .chat-header p { color: var(--text); opacity: 0.7; max-width: 400px; margin: 0 auto; }
+
+        #chat-display {
+            height: 400px;
+            overflow-y: auto;
+            padding-right: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        #chat-display::-webkit-scrollbar { width: 6px; }
+        #chat-display::-webkit-scrollbar-track { background: transparent; }
+        #chat-display::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 20px; }
+
+        .chat-message-ai, .chat-message-user { display: flex; align-items: flex-start; gap: 0.75rem; }
+        .chat-message-user { justify-content: flex-end; }
+        
+        .ai-avatar {
+            flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #e67e22);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ai-avatar svg { width: 24px; height: 24px; color: var(--primary); }
+
+        .message-content { max-width: 80%; }
+        .message-content > div {
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+        .chat-message-ai .message-content > div { background: rgba(0,0,0,0.2); border-top-left-radius: 0; color: var(--text); }
+        .chat-message-user .message-content > div { background: var(--accent); border-top-right-radius: 0; color: var(--primary); }
+
+        /* Markdown Styles */
+        .message-content ul, .message-content ol { padding-left: 20px; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .message-content li { margin-bottom: 0.25rem; }
+        .message-content a { color: var(--accent); text-decoration: underline; }
+        .message-content strong { font-weight: bold; }
+        .message-content code { background-color: rgba(0,0,0,0.3); padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+        .message-content pre { background-color: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; }
+        .message-content pre code { background: none; padding: 0; }
+
+        .typing-dots { display: flex; gap: 4px; align-items: center; justify-content: center; height: 24px;}
+        .typing-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; animation: typing-bounce 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing-bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+
+        .suggested-questions-wrapper {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+            margin-bottom: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1rem;
+        }
+        .suggested-question-btn {
+            font-size: 0.85rem; color: var(--text);
+            background: rgba(255, 255, 255, 0.1); padding: 0.4rem 0.8rem;
+            border-radius: 20px; border: none; cursor: pointer;
+            transition: var(--transition);
+        }
+        .suggested-question-btn:hover { background: var(--accent); color: var(--primary); }
+        #clear-chat-btn { margin-left: auto; background: rgba(255, 82, 82, 0.2); }
+        #clear-chat-btn:hover { background: rgba(255, 82, 82, 0.5); color: var(--light); }
+
+        #chat-form { display: flex; align-items: center; gap: 0.75rem; }
+        #chat-input {
+            width: 100%; padding: 0.8rem 1rem;
+            background: rgba(0,0,0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px; color: var(--text); font-family: inherit;
+            transition: var(--transition);
+        }
+        #chat-input:focus { outline: none; border-color: var(--accent); }
+        #chat-form button[type="submit"] {
+            flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: var(--transition);
+            background: var(--accent); color: var(--primary); border: none;
+        }
+        #chat-form button[type="submit"]:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(252, 163, 17, 0.4); }
+        #chat-form button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+        #chat-form button svg { width: 24px; height: 24px; transform: translateX(1px); }
+
+        /* === END: AI CHATBOT STYLES === */
+
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hamburger { display: block; font-size: 1.5rem; color: var(--text); z-index: 1001; }
+            .nav-links {
+                position: fixed; top: 0; left: -100%; width: 70%; max-width: 300px; height: 100vh;
+                background: var(--dark); flex-direction: column; align-items: center;
+                justify-content: center; transition: var(--transition); z-index: 1000;
+                padding-top: 60px; box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+            }
+            .nav-links.active { left: 0; }
+            .nav-links li { margin: 1.5rem 0; margin-left: 0; }
+            .hero-image { display: none; }
+            .hero-shape { display: none; }
+            #hero { text-align: center; }
+            .hero-btns { justify-content: center; }
+            .about-container { flex-direction: column; gap: 3rem; text-align: center; }
+            .about-img { max-width: 400px; margin: 0 auto; }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2.5rem; }
+            .hero-content h1 { font-size: 3rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+         @media (max-width: 576px) {
+            .hero-btns { flex-direction: column; gap: 1rem; align-items: center; }
+         }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#hero" class="logo">ALFT<span>.</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Skill</a></li>
+                    <li><a href="#portfolio">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Alafit Tayeh<span></span></h1>
+                <p>I am passionate about transforming ideas into elegant and functional digital experiences.
+By emphasizing clean, maintainable code and user-focused design, I develop websites that are not only effective but also deliver a seamless and intuitive experience.</p>
+                <div class="hero-btns">
+                    <a href="#portfolio" class="btn btn-accent">Get My Resume</a>
+                    <a href="#contact" class="btn">AI Assistant</a>
+                </div>
+            </div>
+            <div class="hero-shape"></div>
+            <div class="hero-image floating">
+                <img src="images/01.png" alt="Alafit Tayeh Portrait">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="images/1.jpeg" alt="Alafit Tayeh Profile Picture">
+                </div>
+                <div class="about-content">
+                    <h3>I am a person who is genuinely dedicated and committed to everything I do.
+Although I tend to be quiet, I value taking action and achieving results more than words.
+I enjoy spending time learning and developing new skills, especially those that help me grow — both in mindset and in my work.
+To me, this internship is not just an opportunity but a platform to prove my abilities and learn from real-world experiences to better prepare myself for the future.</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">My Skill</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>I build custom websites from scratch using modern tools and frameworks — creating fast, secure, and scalable digital experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>UI/UX Design</h3>
+                    <p>Designing clean, intuitive user interfaces with a strong focus on user experience, from wireframing to final design.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Crafting websites that adapt seamlessly to any screen size, ensuring a consistent experience across all devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><img src="images/5.jpeg" alt="Project 1" class="portfolio-img"></div>
+                <div class="portfolio-item"><img src="images/1.jpeg" alt="Project 2" class="portfolio-img"></div>
+                <div class="portfolio-item"><img src="images/6.jpeg" alt="Project 3" class="portfolio-img"></div>
+                <div class="portfolio-item"><img src="images/2.jpeg" alt="Project 4" class="portfolio-img"></div>
+                <div class="portfolio-item"><img src="images/7.jpeg" alt="Project 5" class="portfolio-img"></div>
+                <div class="portfolio-item"><img src="images/3.jpeg" alt="Project 6" class="portfolio-img"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with AI Chatbot -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <!-- Left Column: Contact Info -->
+                <div class="contact-info-col">
+                    <h3>Contact</h3>
+                    <p>If you have any questions or are interested in working with me, feel free to reach out through the channels below. Or, you can try chatting with my AI on the right first.</p>
+                    <div class="contact-links-wrapper">
+                        <!-- Email -->
+                        <a href="mailto:406565018@yru.ac.th" class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <p class="title">Email</p>
+                                <p class="subtitle">406565018@yru.ac.th</p>
+                            </div>
+                        </a>
+                        <!-- Phone -->
+                        <a href="tel:0945044472" class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                </svg>
+                            </div>
+                             <div class="contact-card-text">
+                                <p class="title">Phone</p>
+                                <p class="subtitle">094-504-4472</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: AI Chat -->
+                <div class="chat-col">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <h3>Have a Question?</h3>
+                            <p>Ask my personal AI about the information on this page.</p>
+                        </div>
+                        <div id="chat-display"></div>
+                        <div class="suggested-questions-wrapper">
+                            <button class="suggested-question-btn">What are his main skills?</button>
+                            <button class="suggested-question-btn">How can I contact him?</button>
+                            <button id="clear-chat-btn" title="Clear Chat" class="suggested-question-btn">Clear</button>
+                        </div>
+                        <form id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Type your question here..." required autocomplete="off">
+                            <button type="submit" aria-label="Send Message">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Footer -->
+    <footer>
+        <div class="container footer-content">
+            <a href="#hero" class="logo">ALFT<span>.</span></a>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link" aria-label="Github"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Alafit Tayeh. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#hero" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="nav-overlay"></div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- PART 1: PORTFOLIO INTERACTIVITY ---
+            // (โค้ดส่วนนี้เหมือนเดิมทุกประการ)
+            const header = document.querySelector('#header');
+            const backToTopBtn = document.querySelector('.back-to-top');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navItems = document.querySelectorAll('.nav-links a');
+            const navOverlay = document.querySelector('.nav-overlay');
+        
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('active');
+                } else {
+                    backToTopBtn.classList.remove('active');
+                }
+            });
+        
+            const toggleNav = () => {
+                const isActive = navLinks.classList.toggle('active');
+                navOverlay.classList.toggle('active', isActive);
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            };
+        
+            hamburger.addEventListener('click', toggleNav);
+            navOverlay.addEventListener('click', toggleNav);
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (navLinks.classList.contains('active')) {
+                        toggleNav();
+                    }
+                    const targetId = item.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const headerHeight = header.offsetHeight;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const sections = document.querySelectorAll('section[id]');
+                const headerHeight = header.offsetHeight;
+                const scrollPosition = window.pageYOffset;
+        
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - headerHeight - 60;
+                    if (scrollPosition >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+        
+                navItems.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        
+            // --- PART 2: AI CHATBOT LOGIC (ดึงจาก text.txt) ---
+            const chatForm = document.getElementById("chat-form");
+            const chatInput = document.getElementById("chat-input");
+            const chatDisplay = document.getElementById("chat-display");
+            const sendButton = chatForm.querySelector("button[type='submit']");
+            const suggestedQuestions = document.querySelectorAll('.suggested-question-btn');
+            const clearChatBtn = document.getElementById('clear-chat-btn');
+        
+            // !!!! ATTENTION: REPLACE "YOUR_API_KEY" WITH YOUR ACTUAL GOOGLE AI API KEY !!!!
+            const API_KEY = "AIzaSyBazp6TPmCkqcn5KB6n1yQcIC3ZkgOeYlg";
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+        
+            let typingIndicatorElement = null;
+            let conversationHistory = [];
+        
+            // --- ฟังก์ชันสำหรับดึงข้อมูลจาก text.txt ---
+            async function loadPromptFromFile() {
+                try {
+                    const response = await fetch('text.txt');
+                    if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
+                    const promptText = await response.text();
+                    return { role: "user", parts: [{ text: promptText }] };
+                } catch (error) {
+                    console.error("Error loading prompt from file:", error);
+                    // Fallback prompt in case text.txt is not found
+                    return { role: "user", parts: [{ text: "You are a helpful assistant for the portfolio of Alafit Tayeh." }] };
+                }
+            }
+        
+            const personalityResponse = {
+                role: "model",
+                parts: [{
+                    text: "Hello! I'm alabot, Alafit's personal AI assistant. I'm here to help answer any questions you have about him. What would you like to know?"
+                }]
+            };
+        
+            function addMessageToChat(text, sender) {
+                if (typingIndicatorElement) {
+                    typingIndicatorElement.remove();
+                    typingIndicatorElement = null;
+                }
+        
+                const messageWrapper = document.createElement("div");
+                let messageHtml = '';
+        
+                if (sender === 'ai') {
+                    const formattedHtml = marked.parse(text);
+                    messageWrapper.className = "chat-message-ai";
+                    messageHtml = `
+                        <div class="ai-avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12v2c0 .28.22.5.5.5h1.313C4.912 18.349 8.21 21 12 21s7.088-2.651 8.187-6.5H21.5c.28 0 .5-.22.5-.5v-2c0-5.514-4.486-10-10-10zm-5 11.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5S8.5 11.172 8.5 12 7.828 13.5 7 13.5zm10 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/></svg>
+                        </div>
+                        <div class="message-content"><div>${formattedHtml}</div></div>`;
+                } else {
+                    messageWrapper.className = "chat-message-user";
+                    const safeText = text.replace(/</g, "<").replace(/>/g, ">");
+                    messageHtml = `<div class="message-content"><div><p>${safeText}</p></div></div>`;
+                }
+        
+                messageWrapper.innerHTML = messageHtml;
+                chatDisplay.appendChild(messageWrapper);
+                scrollToBottom();
+            }
+        
+            function showTypingIndicator() {
+                if (typingIndicatorElement) return;
+                typingIndicatorElement = document.createElement("div");
+                typingIndicatorElement.className = "chat-message-ai";
+                typingIndicatorElement.innerHTML = `
+                    <div class="ai-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12v2c0 .28.22.5.5.5h1.313C4.912 18.349 8.21 21 12 21s7.088-2.651 8.187-6.5H21.5c.28 0 .5-.22.5-.5v-2c0-5.514-4.486-10-10-10zm-5 11.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5S8.5 11.172 8.5 12 7.828 13.5 7 13.5zm10 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/></svg>
+                    </div>
+                    <div class="message-content"><div><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+                chatDisplay.appendChild(typingIndicatorElement);
+                scrollToBottom();
+            }
+        
+            function scrollToBottom() {
+                chatDisplay.scrollTo({ top: chatDisplay.scrollHeight, behavior: 'smooth' });
+            }
+        
+            async function askGemini(question) {
+                addMessageToChat(question, "user");
+                const userMessage = { role: "user", parts: [{ text: question }] };
+                conversationHistory.push(userMessage);
+                
+                chatInput.value = "";
+                sendButton.disabled = true;
+                chatInput.disabled = true;
+                showTypingIndicator();
+        
+                if (API_KEY === "YOUR_API_KEY") {
+                    addMessageToChat("I'm not set up yet. The developer needs to add an API key.", "ai");
+                    sendButton.disabled = false;
+                    chatInput.disabled = false;
+                    return;
+                }
+        
+                const payload = { contents: conversationHistory };
+                try {
+                    const res = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+                    if (!res.ok) {
+                        const errorData = await res.json();
+                        throw new Error(errorData.error.message || `API request failed with status ${res.status}`);
+                    }
+                    const data = await res.json();
+                    let responseText = "Sorry, I couldn't get a response. Please try again.";
+                    if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+                        responseText = data.candidates[0].content.parts[0].text;
+                    }
+                    const botMessage = { role: "model", parts: [{ text: responseText }] };
+                    conversationHistory.push(botMessage);
+                    addMessageToChat(responseText, "ai");
+                } catch (err) {
+                    console.error("API Error:", err);
+                    addMessageToChat(`Oops! Something went wrong. ${err.message}`, "ai");
+                } finally {
+                    sendButton.disabled = false;
+                    chatInput.disabled = false;
+                    chatInput.focus();
+                }
+            }
+        
+            // --- อัปเดตฟังก์ชันนี้ให้เป็น async/await ---
+            async function initializeChat() {
+                chatDisplay.innerHTML = '';
+                // รอให้โหลดไฟล์ text.txt เสร็จก่อน
+                const personalityPrompt = await loadPromptFromFile();
+                conversationHistory = [personalityPrompt, personalityResponse];
+                addMessageToChat(personalityResponse.parts[0].text, 'ai');
+            }
+        
+            chatForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const question = chatInput.value.trim();
+                if (question) {
+                    askGemini(question);
+                }
+            });
+        
+            suggestedQuestions.forEach(button => {
+                button.addEventListener('click', () => {
+                    const question = button.textContent;
+                    if(question.toLowerCase() === 'clear'){
+                        initializeChat();
+                    } else {
+                        chatInput.value = question;
+                        askGemini(question);
+                    }
+                });
+            });
+        
+            // เริ่มการทำงานของ Chat
+            initializeChat();
+        });
+        </script>
+</body>
+
+</html>
